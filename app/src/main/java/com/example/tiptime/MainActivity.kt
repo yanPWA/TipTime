@@ -6,11 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.tiptime.ui.theme.TipTimeTheme
+import java.text.NumberFormat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,9 +20,20 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TipTimeScreen()
+                    TipTimeScreen(::calculateTip)
                 }
             }
         }
+    }
+
+    /**
+     * チップの計算
+     */
+    private fun calculateTip(
+        amount: Double,
+        tipPercent: Double = 15.0
+    ):String {
+        val tip = tipPercent / 100 * amount
+        return NumberFormat.getCurrencyInstance().format(tip)
     }
 }
