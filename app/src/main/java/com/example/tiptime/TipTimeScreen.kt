@@ -109,6 +109,38 @@ fun EditNumberField(
     )
 }
 
+/**
+ * 切り上げ表示するかどうか
+ */
+@Composable
+fun RoundTheTipRow(
+    roundUp: Boolean = false,
+    onRoundUpChanged: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .size(48.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(id = R.string.round_up_tip),
+            textAlign = TextAlign.Start
+        )
+        Switch(
+            checked = roundUp,
+            onCheckedChange = onRoundUpChanged,
+            modifier = modifier
+                .fillMaxWidth()
+                .wrapContentWidth(align = Alignment.End),
+            colors = SwitchDefaults.colors(
+                uncheckedThumbColor = Color.DarkGray
+            )
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
